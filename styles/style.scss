@@ -1,0 +1,58 @@
+// Splitting up the css file to prevent things getting too clustered
+@import './variables';
+@import './header';
+@import './footer';
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $bodyColor;
+}
+
+// Mixin that takes in the column layout and the grid width as parameters
+@mixin gridLayout($gridLayout, $gridWidth) {
+    display: grid;
+    grid-template-columns: $gridLayout;
+    grid-auto-rows: 1fr;
+    justify-items: center;
+    gap: $gridGap;
+    width: $gridWidth;
+    margin: 0 auto;
+    padding: $gridPadding 0;
+}
+
+.content {
+    background-color: $contentBackground;
+    padding-bottom: $gridPadding;
+    
+    h1 {
+        padding-top: $gridPadding;
+        text-align: center;
+        color: $contentFontColor;
+        font-family: $siteFont;
+    }
+
+    .fruit-grid {
+        // Display the fruit grid as 3 columns with it's own width variable
+        @include gridLayout(repeat(3, 1fr), $fruitGridWidth);
+        border: $fruitBorder;
+        img {
+            width: $gridImgWidth;
+            height: $gridImgHeight;
+        }
+    }
+    
+    .vegetable-grid {
+        // Display the vegetable grid as 2 columns with it's own width variable
+        @include gridLayout(repeat(2, 1fr), $veggieGridWidth);
+        border: $veggieBorder;
+        img {
+            width: $gridImgWidth;
+            height: $gridImgHeight;
+        }
+    }
+}
